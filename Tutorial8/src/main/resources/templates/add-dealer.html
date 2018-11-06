@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Dealer</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <h2>Hello!</h2>
+
+    <h3>Tambah Dealer</h3>
+    <form th:action="@{/dealer/add}" th:object="${dealer}" method="POST">
+        Nama: <br>
+        <input type="text" name="nama" />
+        <br>
+        Alamat: <br>
+        <input type="text" name="alamat" />
+        <br>
+        No. Telp: <br>
+        <input type="text" name="noTelp" />
+        <br><br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+
+</html>

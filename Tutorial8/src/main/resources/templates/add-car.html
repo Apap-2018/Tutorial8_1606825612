@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Car</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <h2>Hello!</h2>
+
+    <h3>Tambah Mobil</h3>
+    <form th:action="@{/car/add/} + ${dealer.id}" th:object="${dealer}" method="POST">
+        <input type="hidden" th:field="*{id}" />
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>
+                        <button type="submit" name="addRow" class="btn btn-primary">Tambah</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tableContent">
+                <tr th:each="car,iterationStatus : *{listCar}">
+                    <td>
+                        <input type="text" th:field="*{listCar[__${iterationStatus.index}__].brand}">
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{listCar[__${iterationStatus.index}__].type}">
+                    </td>
+                    <td>
+                        <input type="number" th:field="*{listCar[__${iterationStatus.index}__].price}">
+                    </td>
+                    <td>
+                        <input type="number" th:field="*{listCar[__${iterationStatus.index}__].amount}">
+                    </td>
+                    <td>
+                        <button type="submit" name="removeRow" th:value="${iterationStatus.index}" class="btn btn-primary">Hapus</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" name="save" class="btn btn-primary">Simpan</button>
+    </form>
+</body>
+
+</html>

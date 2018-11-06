@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <div class="container-fluid">
+        <h2 th:text=" 'Hello ' + ${#httpServletRequest.remoteUser} + ' ! '">Login as</h2>
+        <h2 th:text="${msg}"></h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Update Password
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/user/passwordSubmit}" method="POST">
+								<div class="row form-group">
+									<label class="col-sm-3">Password Lama</label>
+									<input class="col-sm-9 form-control input-sm" id="oldPass" type="password" name="oldPassword"/>
+								</div>
+								<div class="row form-group">
+									<label class="col-sm-3">Password Baru</label>
+									<input class="col-sm-9 form-control input-sm" id="newPass" type="password" name="newPassword"/>
+								</div>
+								<div class="row form-group">
+									<label class="col-sm-3">Konfirmasi Password Baru</label>
+									<input class="col-sm-9 form-control input-sm" id="confirmNewPass" name ="conPassword" type="password"/>
+								</div>
+								<div>
+									<button type="submit" class="btn btn-primary">Simpan</button>
+								</div>
+					</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        
+    </div>
+</body>
+
+</html>

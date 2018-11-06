@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>View Dealer</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+
+    <h3 th:text="'Dealer ' + ${dealer.nama}"></h3>
+    <p th:text="'Alamat: ' + ${dealer.alamat}"></p>
+    <p th:text="'No. Telp: ' + ${dealer.noTelp}"></p>
+    <form th:action="@{/dealer/delete}">
+        <input type="hidden" name="dealerId" th:value="${dealer.id}">
+        <button type="submit" class="btn btn-danger">Hapus Dealer</button>
+    </form>
+    <br>
+    <form th:action="@{/car/delete}" th:object="${dealer}" method="POST">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Detail</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="car,iterationStatus : *{listCar}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${car.brand}"></td>
+                    <td th:text="${car.type}"></td>
+                    <td th:text="${car.price} >= 1000000000 ? 'Diatas 1M' : 'Dibawah 1M'"></td>
+                    <td th:text="${car.amount}"></td>
+                    <td><a th:href="@{/car/update?type=} + ${car.type}">Detail</a></td>
+                    <td>
+                        <input type="checkbox" th:field="*{listCar}" th:value="${car.id}" />
+                        <label th:for="${#ids.prev('listCar')}">Hapus</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-danger">Hapus yang dipilih</button>
+    </form>
+    <br>
+    <form th:action="@{/car/add/} + ${dealer.id}">
+        <button value="submit" class="btn btn-primary">Tambah Mobil</button>
+    </form>
+</body>
+
+</html>

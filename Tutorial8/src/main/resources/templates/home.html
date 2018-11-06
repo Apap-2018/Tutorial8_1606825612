@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>HOME</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>>
+
+    <div class="container-fluid">
+        <h2 th:text=" 'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Login as</h2>
+        <h2 th:text="${message}"></h2>
+        <div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						Tambah User Baru
+					</div>
+					<div class="card-body">
+						<form th:action="@{/user/addUser}" method="post">
+							<div class="row form-group">
+								<label class="col-sd-4"> User Name</label>
+								<input class="col-sd-8 form-control input-sm" type="text" name="username">
+							</div>
+							<div class="row form-group">
+								<label class="col-sd-4"> Password: </label>
+								<input class="col-sd-8 form-control input-sm" type="password" name="password">
+							</div>
+							<div class="row form-group">
+								<label class="col-sd-4"> Role: </label>
+								<input class="col-sd-8 form-control input-sm" type="text" name="role">
+							</div>
+							<div>
+								<button type="submit" class="btn btn-primary">Simpan</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Tambah Dealer
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Fitur untuk menambah dealer.</p>
+                        <a class="btn btn-primary" th:href="@{/dealer/add}">Tambah</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Cari Dealer berdasarkan Id
+                    </div>
+                    <form th:action="@{/dealer/view}" method="GET">
+                        <div class="card-body">
+                            <label for="dealerId">Id Dealer:</label>
+                            <input type="text" name="dealerId" class="form-control" />
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>       
+    </div>
+</body>
+<!-- <script th:inline="javascript">
+$("input[type=password]").keyup(function() {
+	var num = new RegExp("[0-9]+");
+	
+	if($("#password").val().length >= 8) {
+		$("#8char").removeClass("glyphicon-remove");
+		$("#8char").addClass("glyphicon-ok");
+		$("#8char").css("color","#00A41E");
+	}else{
+		$("#8char").removeClass("glyphicon-ok");
+		$("#8char").addClass("glyphicon-remove");
+		$("#8char").css("color","#FF0004");
+	}
+	
+	if(num.test($("#password").val())){
+		$("#num").removeClass("glyphicon-remove");
+		$("#num").addClass("glyphicon-ok");
+		$("#num").css("color","#00A41E");
+	}else{
+		$("#num").removeClass("glyphicon-ok");
+		$("#num").addClass("glyphicon-remove");
+		$("#num").css("color","#FF0004");
+	});
+</script> -->
+</html>
